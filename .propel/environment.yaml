@@ -1,0 +1,25 @@
+stack: dotnet
+install_cmd: find . \( -name .git -o -name .propel -o -name bin -o -name obj -o -name
+  node_modules \) -prune -o \( -name '*.csproj' -o -name '*.fsproj' \) -print | while
+  IFS= read -r p; do dotnet restore "$p" -v q || exit 1; done && if [ -f .config/dotnet-tools.json
+  ]; then dotnet tool restore; fi
+syntax_cmd: find . \( -name .git -o -name .propel -o -name bin -o -name obj -o -name
+  node_modules \) -prune -o \( -name '*.csproj' -o -name '*.fsproj' \) ! -iname '*test*'
+  -print | while IFS= read -r p; do dotnet build "$p" -nologo -v q -nodeReuse:false
+  -p:UseSharedCompilation=false -clp:ErrorsOnly || exit 1; done
+build_cmd: find . \( -name .git -o -name .propel -o -name bin -o -name obj -o -name
+  node_modules \) -prune -o \( -name '*.csproj' -o -name '*.fsproj' \) ! -iname '*test*'
+  -print | while IFS= read -r p; do dotnet build "$p" -nologo -v q -nodeReuse:false
+  -p:UseSharedCompilation=false || exit 1; done
+test_cmd: rm -rf .propel/tr; find . \( -name .git -o -name .propel -o -name bin -o
+  -name obj -o -name node_modules \) -prune -o \( -iname '*test*.csproj' -o -iname
+  '*test*.fsproj' \) -print | while IFS= read -r p; do dotnet test "$p" -nologo -v
+  q -nodeReuse:false -p:UseSharedCompilation=false --logger "trx;LogFilePrefix=r"
+  --results-directory .propel/tr; done; cat .propel/tr/*.trx
+test_selector: rm -rf .propel/tr; find . \( -name .git -o -name .propel -o -name bin
+  -o -name obj -o -name node_modules \) -prune -o \( -iname '*test*.csproj' -o -iname
+  '*test*.fsproj' \) -print | while IFS= read -r p; do dotnet test "$p" -nologo -v
+  q -nodeReuse:false -p:UseSharedCompilation=false --logger "trx;LogFilePrefix=r"
+  --results-directory .propel/tr --filter "{path}"; done; cat .propel/tr/*.trx
+dependency_file: packages.lock.json
+runtime_version: '8.0'
