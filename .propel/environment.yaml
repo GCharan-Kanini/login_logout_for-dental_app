@@ -1,0 +1,14 @@
+stack: dotnet
+install_cmd: dotnet add package Microsoft.EntityFrameworkCore.SqlServer && dotnet
+  add package dotnet-ef && dotnet add package xunit && dotnet add package Microsoft.EntityFrameworkCore.InMemory
+  && dotnet restore
+syntax_cmd: for p in $(find . -name '*.csproj' ! -iname '*test*.csproj'); do dotnet
+  build "$p" --no-restore -nologo -v q -clp:ErrorsOnly || exit 1; done
+build_cmd: for p in $(find . -name '*.csproj' ! -iname '*test*.csproj'); do dotnet
+  build "$p" --no-restore -nologo -v q || exit 1; done
+test_cmd: rm -rf .propel/tr; dotnet test --no-restore -nologo --logger "trx;LogFileName=r.trx"
+  --results-directory .propel/tr; cat .propel/tr/r.trx
+test_selector: rm -rf .propel/tr; dotnet test --no-restore -nologo --logger "trx;LogFileName=r.trx"
+  --results-directory .propel/tr --filter "{path}"; cat .propel/tr/r.trx
+dependency_file: packages.lock.json
+runtime_version: '8.0'
