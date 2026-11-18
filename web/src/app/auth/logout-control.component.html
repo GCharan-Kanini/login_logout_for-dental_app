@@ -1,0 +1,14 @@
+<div class="logout">
+  <button type="button" (click)="auth.logout()" [disabled]="auth.loggingOut()">
+    {{ auth.loggingOut() ? 'Logging out…' : 'Log out' }}
+  </button>
+
+  @if (auth.logoutFailed()) {
+    <div class="logout__error">
+      <p role="alert">Logout failed. You are still signed in.</p>
+      <button type="button" (click)="auth.logout()" [disabled]="auth.loggingOut()">
+        {{ auth.loggingOut() ? 'Retrying…' : 'Retry' }}
+      </button>
+    </div>
+  }
+</div>
