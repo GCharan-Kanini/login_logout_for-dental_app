@@ -1,0 +1,37 @@
+{
+  "contract": "CTR-001",
+  "kind": "schema",
+  "version": 1,
+  "cases": [
+    {
+      "id": "schema document",
+      "check": "validate",
+      "target": "document",
+      "expect": "accepts a valid document"
+    },
+    {
+      "id": "schema document types email",
+      "check": "validate",
+      "target": "document",
+      "expect": "email is string"
+    },
+    {
+      "id": "schema document types id",
+      "check": "validate",
+      "target": "document",
+      "expect": "id is string"
+    },
+    {
+      "id": "schema document types name",
+      "check": "validate",
+      "target": "document",
+      "expect": "name is string"
+    },
+    {
+      "id": "schema document types password_hash",
+      "check": "validate",
+      "target": "document",
+      "expect": "password_hash is string"
+    }
+  ]
+}

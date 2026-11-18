@@ -1,0 +1,20 @@
+{
+  "contract": "CTR-002",
+  "kind": "http",
+  "version": 1,
+  "responses": [
+    {
+      "method": "POST",
+      "path": "/api/auth/signin",
+      "status": "200",
+      "media_type": "application/json",
+      "body": {
+        "expires_at": "example",
+        "last_activity": "example",
+        "session_id": "example",
+        "state": "example",
+        "user_id": "example"
+      }
+    }
+  ]
+}

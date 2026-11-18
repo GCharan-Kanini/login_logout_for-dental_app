@@ -1,0 +1,13 @@
+{
+  "contract": "CTR-002",
+  "kind": "http",
+  "version": 1,
+  "cases": [
+    {
+      "id": "http POST /api/auth/signin 200",
+      "check": "request",
+      "target": "POST /api/auth/signin",
+      "expect": "answers 200"
+    }
+  ]
+}
