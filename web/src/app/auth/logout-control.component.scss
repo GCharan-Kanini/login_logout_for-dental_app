@@ -1,0 +1,17 @@
+.logout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.logout__error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--color-error);
+
+  p {
+    margin: 0;
+  }
+}
