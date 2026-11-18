@@ -1,0 +1,107 @@
+{
+  "record": "legacy-shared-login-acceptance-record",
+  "story": "US-005",
+  "template": "legacy-shared-login-acceptance-record.md",
+  "runbook": "legacy-shared-login-migration.md",
+  "version": 1,
+  "legacy_entry": {
+    "label": "LEGACY",
+    "required_fields": [
+      "entry_label",
+      "recorded_at",
+      "legacy_identifier",
+      "last_known_contact",
+      "approximate_usage"
+    ],
+    "optional_when_unknown": [
+      "contact_unknown_responsible"
+    ],
+    "forbidden_fields": [
+      "password",
+      "password_hash",
+      "token",
+      "session_id"
+    ]
+  },
+  "provisioning_rows": {
+    "required_fields": [
+      "staff_ref",
+      "full_name",
+      "work_email",
+      "site",
+      "role",
+      "account_identifier",
+      "provisioning_status",
+      "signed_in_once",
+      "completed_at"
+    ],
+    "allowed_provisioning_status": [
+      "complete",
+      "already provisioned",
+      "pending"
+    ],
+    "complete_requires": [
+      "account_identifier",
+      "signed_in_once",
+      "completed_at"
+    ]
+  },
+  "operational_record": {
+    "required_fields": [
+      "account_status",
+      "delegate",
+      "rollbacks_in_run"
+    ],
+    "decision_entries": {
+      "repeatable": true,
+      "required_fields": [
+        "decided_by",
+        "decided_at"
+      ]
+    },
+    "disablement_entries": {
+      "repeatable": true,
+      "required_fields": [
+        "disabled_at",
+        "disabled_by",
+        "sessions_ended"
+      ],
+      "optional_fields": [
+        "reenabled_at"
+      ]
+    },
+    "verification_entries": {
+      "repeatable": true,
+      "required_fields": [
+        "verification_recorded_at",
+        "verification_outcome"
+      ]
+    },
+    "allowed_account_status": [
+      "disabled",
+      "enabled"
+    ],
+    "allowed_verification_outcome": [
+      "rejected",
+      "accepted",
+      "not performed"
+    ]
+  },
+  "sign_off": {
+    "required_fields": [
+      "owner_name",
+      "signed_at",
+      "statement"
+    ]
+  },
+  "verification_checks": [
+    "V1 Legacy entry present",
+    "V2 Legacy fields present",
+    "V3 One row per intended user",
+    "V4 Provisioning complete",
+    "V5 Signed in once",
+    "V6 Shared account disabled",
+    "V7 Verification recorded",
+    "V8 No secrets"
+  ]
+}

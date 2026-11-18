@@ -1,0 +1,81 @@
+{
+  "runbook": "legacy-shared-login-migration",
+  "story": "US-005",
+  "file": "legacy-shared-login-migration.md",
+  "version": 2,
+  "required_sections": [
+    "1. Scope and prerequisites",
+    "2. Legacy-capture checklist",
+    "3. Step sequence",
+    "4. Mapping template",
+    "5. Usage note for clinic owners",
+    "6. Edge cases",
+    "7. Disablement",
+    "8. Verification",
+    "9. Rollback",
+    "10. Edge-case decisions",
+    "11. Run metadata"
+  ],
+  "required_checklist_fields": [
+    "Legacy identity used",
+    "Last-known contact / email",
+    "Approximate usage summary"
+  ],
+  "required_step_sequence": [
+    "Open the legacy record",
+    "Capture the legacy identity",
+    "Confirm the sites and existing accounts",
+    "Prepare provisioning",
+    "Create individual accounts manually",
+    "Check the new accounts",
+    "Disable the shared account",
+    "Verify the disablement",
+    "Close the run"
+  ],
+  "required_mapping_columns": [
+    "Legacy attribute",
+    "Target staff-account field",
+    "Owner action"
+  ],
+  "required_disablement_step_labels": [
+    "Precondition",
+    "Action",
+    "Immediate observable result"
+  ],
+  "required_disablement_steps": [
+    "7.1 Record the disablement decision",
+    "7.2 Confirm you have the right account",
+    "7.3 Disable the shared account",
+    "7.4 End active sessions for the shared account",
+    "7.5 Update the operational record"
+  ],
+  "required_verification_terms": [
+    "shared credentials",
+    "rejected with an authentication failure"
+  ],
+  "required_rollback_steps": [
+    "9.1 Record the reason",
+    "9.2 Re-enable the shared account",
+    "9.3 Check that the shared login works",
+    "9.4 Record rollback completion"
+  ],
+  "required_edge_case_decisions": [
+    "Missing credentials",
+    "Multi-site use",
+    "Accidental loss of all individual access"
+  ],
+  "required_edge_case_labels": [
+    "Detect",
+    "Do",
+    "Checkpoint"
+  ],
+  "required_run_metadata_fields": [
+    "disabled[].disabled_at",
+    "verification[].outcome",
+    "verification[].observed_response",
+    "rollbacks[].completed_at",
+    "rollbacks[].login_check_outcome",
+    "owner_review.reviewer",
+    "owner_review.reviewed_at"
+  ]
+}
